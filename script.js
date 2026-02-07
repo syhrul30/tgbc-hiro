@@ -16068,7 +16068,7 @@ document.addEventListener('DOMContentLoaded', function() {
          } else {
            const savedBookTitle = vocabItem.dataset.bookTitle;
            if (savedBookTitle && savedBookTitle !== currentBookTitle) {
-               alert(`Duh Bunda, salah lapak... bookmark ini adanya di buku "${targetBookTitle}". Dipikir bund, woilah! 💅`);
+               alert(`Duh Bunda, salah lapak... bookmark ini adanya di buku "${savedBookTitle}". Dipikir bund, woilah! 💅`);
               return;
           }
  
@@ -16204,4 +16204,5 @@ document.addEventListener('DOMContentLoaded', function() {
            zoom: 0.80
        });
    }
+
 });
