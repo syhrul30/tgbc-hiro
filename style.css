@@ -1,72 +1,52 @@
 /* Gaya dasar & Latar Belakang */
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #1A181D; /* Basis gelap baru */
-    color: #E0E0E0; /* Teks dasar baru */
-    overflow-x: hidden;
+:root {
+   --bg-dark: #1a1c18;
+   --glass-base: 30, 30, 24; /* Warm dark base for glass */
+   --accent-green: #7a9a7e; /* Sage Green */
+   --accent-red: #d16d6d; /* Soft Watercolor Red */
+   --text-main: #e6e2d3; /* Washi Paper White */
+   --text-muted: #a3a398;
+   --highlight: #d16d6d;
 }
-
-/* ================================================================ */
-/* ============= GAYA UNTUK KELAS BARU DI HTML ==================== */
-/* ================================================================ */
-.main-title {
-    /* DIUBAH: Gradien Pink ke Hijau */
-    background: linear-gradient(90deg, #f5baee, #67c77e);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.author-link {
-    color: #9df2f2; /* Cyan */
-    transition: color 0.2s ease;
-}
-.author-link:hover {
-    color: #B5F7F7; /* Cyan Lebih Terang */
-}
-
-.main-footer {
-    color: #A0A0A0; /* Abu-abu redup */
-}
-
-/* ================================================================ */
-/* =========== EFEK LATAR BELAKANG AURORA (DIMODIFIKASI) ========== */
-/* ================================================================ */
-.background-shapes {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    overflow: hidden; 
-}
-
-.shape1, .shape2, .shape3 {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(140px);
-    opacity: 0.3; /* Lebih redup agar tidak terlalu silau */
-    transition: transform 0.2s linear;
-}
-
-.shape1 { width: 600px; height: 600px; background: #f5baee; top: -50%; left: -40%; } /* Pink */
-.shape2 { width: 700px; height: 700px; background: #9df2f2; bottom: -60%; right: -50%; } /* Cyan */
-.shape3 { width: 550px; height: 550px; background: #67c77e; bottom: -40%; left: 5%; } /* Green */
-
-/* ================================================================ */
-/* ================= BAR PROGRES & SCROLL REVEAL ================== */
-/* ================================================================ */
-#progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    /* Gradien palet baru */
-    background: linear-gradient(90deg, #f5baee, #9df2f2, #67c77e);
-    width: 0%;
-    z-index: 9999;
-    transition: width 0.1s linear;
+ 
+ body {
+   font-family: 'Lora', serif; /* Font bacaan utama */
+   background-color: var(--bg-dark);
+   color: var(--text-main);
+     overflow-x: hidden;
+ }
+ 
+ /* ================================================================ */
+ /* =========== EFEK LATAR BELAKANG AURORA (DIMODIFIKASI) ========== */
+ /* ================================================================ */
+ .background-shapes {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 0;
+     overflow: hidden; 
+ }
+ 
+/* Menyembunyikan shape lama karena diganti Vanta.js, tapi tidak menghapus class-nya */
+ .shape1, .shape2, .shape3 {
+   display: none;
+ }
+ 
+ /* ================================================================ */
+ /* ================= BAR PROGRES & SCROLL REVEAL ================== */
+ /* ================================================================ */
+ #progress-bar {
+     position: fixed;
+     top: 0;
+     left: 0;
+     height: 4px;
+   background: linear-gradient(90deg, var(--accent-green), var(--text-main), var(--accent-red));
+   box-shadow: 0 0 10px var(--accent-green);
+     width: 0%;
+     z-index: 9999;
+     transition: width 0.1s linear;
 }
 
 .article-container:not(.sub-article-container) {
@@ -89,45 +69,89 @@ body {
 /* ============= GAYA BARU: SOROTAN ARTIKEL (HIGHLIGHT) =========== */
 /* ================================================================ */
 @keyframes temporary-highlight {
-    0% { box-shadow: 0 0 0 0 rgba(245, 186, 238, 0.5); } /* Pink */
-    50% { box-shadow: 0 0 25px 8px rgba(245, 186, 238, 0.2); } /* Pink */
-    100% { box-shadow: 0 0 0 0 rgba(245, 186, 238, 0); } /* Pink */
+   0% { box-shadow: 0 0 0 0 rgba(209, 109, 109, 0.5); }
+   50% { box-shadow: 0 0 25px 8px rgba(209, 109, 109, 0.2); }
+   100% { box-shadow: 0 0 0 0 rgba(209, 109, 109, 0); }
+ }
+ 
+ .article-highlight {
+     animation: temporary-highlight 2s ease-out;
+ }
+ 
+ /* --- GAYA UI UTAMA --- */
+.main-title {
+   font-family: 'Cormorant Garamond', serif;
+   color: var(--text-main);
+   letter-spacing: -0.02em;
+   text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
-
-.article-highlight {
-    animation: temporary-highlight 2s ease-out;
+.text-accent-green { color: var(--accent-green); }
+.text-accent-red { color: var(--accent-red); }
+.author-link { color: var(--accent-green); transition: 0.3s; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;}
+.author-link:hover { color: var(--text-main); text-shadow: 0 0 8px var(--accent-green); }
+ 
+ .title-spotlight {
+     position: relative;
+   /* Reset old gradient */
+   background: none;
+   -webkit-text-fill-color: var(--text-main);
+   color: var(--text-main);
+ }
+ 
+ .article-header { 
+     display: flex; 
+     justify-content: space-between; 
+     align-items: center; 
+     cursor: pointer; 
+     padding: 1rem 1.5rem; 
+     border-radius: 0.85rem; 
+     transition: all 0.3s ease; 
+   color: var(--text-main); 
+   
+   /* GLASSMORPHISM & EMBOSS UPDATE */
+   background: rgba(var(--glass-base), 0.4); 
+   backdrop-filter: blur(6px); 
+   -webkit-backdrop-filter: blur(6px); 
+   box-shadow: 
+       0 8px 32px 0 rgba(0, 0, 0, 0.5),
+       inset 1px 1px 0 rgba(255, 255, 255, 0.05),
+       inset -1px -1px 0 rgba(0, 0, 0, 0.2);
+     position: sticky; 
+     top: 1rem; 
+     z-index: 10; 
+   border: 1px solid rgba(255, 255, 255, 0.08); 
+     background-clip: padding-box; 
+     -webkit-background-clip: padding-box; 
+ }
+.article-header::before { display: none; /* Removed old gradient border */ }
+ 
+.article-header h3 { 
+   color: var(--text-main); 
+   font-family: 'Cormorant Garamond', serif; 
+   font-size: 1.3rem;
+   letter-spacing: 0.05em;
 }
-
-/* --- GAYA UI UTAMA --- */
-
-.article-header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    cursor: pointer; 
-    padding: 1rem 1.5rem; 
-    border-radius: 0.85rem; 
-    transition: all 0.3s ease; 
-    color: #f5baee; /* Pink */
-    background: rgba(40, 38, 45, 0.4); /* Kaca ungu tua */
-    backdrop-filter: blur(16px); 
-    -webkit-backdrop-filter: blur(16px); 
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
-    position: sticky; 
-    top: 1rem; 
-    z-index: 10; 
-    border: 1px solid transparent; 
-    background-clip: padding-box; 
-    -webkit-background-clip: padding-box; 
+ 
+.article-content { 
+   background: rgba(var(--glass-base), 0.3); 
+   backdrop-filter: blur(4px); 
+   -webkit-backdrop-filter: blur(4px); 
+   border: 1px solid rgba(255, 255, 255, 0.05); 
+   border-top: none; 
+   border-radius: 0 0 0.85rem 0.85rem; 
+   max-height: 0; 
+   overflow: hidden; 
+   transition: max-height 0.7s ease-in-out, padding 0.5s ease-in-out; 
+   padding-left: 1.5rem; 
+   padding-right: 1.5rem; 
+   padding-top: 0; 
+   padding-bottom: 0; 
+   box-shadow: inset 0 10px 20px -10px rgba(0,0,0,0.5);
 }
-/* Gradien border palet baru */
-.article-header::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; margin: -1px; border-radius: inherit; background: linear-gradient(120deg, rgba(245, 186, 238, 0.3), rgba(157, 242, 242, 0.3), rgba(103, 199, 126, 0.3)); }
-.article-header h3 { color: #f5baee; } /* Pink */
-.article-content { background: rgba(40, 38, 45, 0.4); /* Kaca ungu tua */ backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 0px solid rgba(255, 255, 255, 0.1); border-top: none; border-radius: 0 0 0.85rem 0.85rem; max-height: 0; overflow: hidden; transition: max-height 0.7s ease-in-out, padding 0.5s ease-in-out; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0; padding-bottom: 0; }
-.article-content-inner p { margin-bottom: 1rem; text-align: justify; text-indent: 2em; }
-
-.article-content-inner img {
-    cursor: pointer;
+.article-content-inner p { margin-bottom: 1rem; text-align: justify; text-indent: 2em; color: var(--text-main); }
+ 
+ .article-content-inner img {
+     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .article-content-inner img:hover {
@@ -136,60 +160,94 @@ body {
 }
 
 .article-content-inner p:last-child { margin-bottom: 0; }
-.article-container.active .article-header { border-radius: 0.85rem 0.85rem 0 0; background: rgba(40, 38, 45, 0.6); } /* Kaca ungu tua */
-.article-container.active .article-content { max-height: 90vh; overflow-y: auto; padding-top: 1.5rem; padding-bottom: 1.5rem; }
-.collapse-icon svg { transition: transform 0.3s ease-in-out; stroke: #f5baee; } /* Pink */
-.article-container.active .collapse-icon svg { transform: rotate(180deg); }
-.article-content::-webkit-scrollbar { width: 8px; }
-.article-content::-webkit-scrollbar-track { background: rgba(40, 38, 45, 0.1); border-radius: 10px; } /* Kaca ungu tua */
-.article-content::-webkit-scrollbar-thumb { background-color: #f5baee; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; } /* Pink */
-.article-content::-webkit-scrollbar-thumb:hover { background-color: #F7CFF3; } /* Pink Terang */
-
-/* ================================================================ */
-/* =========== GAYA SOROTAN TEKS & ANIMASI BARU ============= */
-/* ================================================================ */
-.original-text-segment { cursor: pointer; transition: background-color 0.2s ease-in-out; padding: 2px 4px; border-radius: 6px; }
-.original-text-segment:hover { background-color: rgba(245, 186, 238, 0.2); } /* Pink */
-
-/* Gaya sorotan standar saat teks diklik */
-.selected-text { 
-    background-color: #f5baee !important; /* Pink */
-    color: #1A181D !important; /* Latar belakang gelap (kontras tinggi) */
-    font-weight: 500; 
+.article-container.active .article-header { 
+   border-radius: 0.85rem 0.85rem 0 0; 
+   background: rgba(var(--glass-base), 0.6); 
+   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-
-/* Animasi kedip baru ditambahkan di sini */
-@keyframes bookmark-blink {
-    0%, 100% {
-        background-color: transparent;
-        color: inherit;
-    }
-    50% {
-        background-color: #f5baee; /* Pink */
-        color: #1A181D; /* Latar belakang gelap */
-        font-weight: 500;
-    }
+ .article-container.active .article-content { max-height: 90vh; overflow-y: auto; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.collapse-icon svg { transition: transform 0.3s ease-in-out; stroke: var(--accent-green); }
+ .article-container.active .collapse-icon svg { transform: rotate(180deg); }
+ 
+/* SCROLLBAR STYLING */
+ .article-content::-webkit-scrollbar { width: 8px; }
+.article-content::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 10px; }
+.article-content::-webkit-scrollbar-thumb { 
+   background-color: var(--accent-green); 
+   border-radius: 10px; 
+   border: 2px solid transparent; 
+   background-clip: content-box; 
+   box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3);
 }
-
-/* Kelas baru untuk menerapkan animasi */
-.bookmark-highlight {
-    animation: bookmark-blink 0.8s ease-in-out 3;
+.article-content::-webkit-scrollbar-thumb:hover { background-color: var(--text-main); }
+ 
+ /* ================================================================ */
+ /* =========== GAYA SOROTAN TEKS & ANIMASI BARU ============= */
+ /* ================================================================ */
+ .original-text-segment { cursor: pointer; transition: background-color 0.2s ease-in-out; padding: 2px 4px; border-radius: 6px; }
+.original-text-segment:hover { background-color: rgba(122, 154, 126, 0.3); }
+ 
+ /* Gaya sorotan standar saat teks diklik */
+.selected-text { background-color: var(--accent-green)!important; color: #000!important; font-weight: 600!important; }
+ 
+ /* Animasi kedip baru ditambahkan di sini */
+ @keyframes bookmark-blink {
+     0%, 100% {
+         background-color: transparent;
+         color: inherit;
+     }
+     50% {
+       background-color: var(--accent-green);
+       color: #000;
+         font-weight: 500;
+     }
+ }
+ 
+ /* Kelas baru untuk menerapkan animasi */
+ .bookmark-highlight {
+     animation: bookmark-blink 0.8s ease-in-out 3;
+ }
+ 
+/* TRANSLATION POPUP STYLE UPDATE */
+#translation-popup { 
+   display: flex; 
+   align-items: center; 
+   gap: 0.75rem; 
+   position: absolute; 
+   z-index: 20; 
+   transform: translateY(8px); 
+   transition: opacity 0.2s ease-in-out; 
+   pointer-events: none; 
+   opacity: 0; 
+   padding: 1rem; 
+   border-radius: 0.5rem; 
+   max-width: 450px; 
+   font-size: 0.9rem; 
+   font-family: 'Lora', serif;
+   color: var(--text-main); 
+   
+   /* GLASS & EMBOSS */
+   background: rgba(var(--glass-base), 0.7); 
+   backdrop-filter: blur(5px); 
+   -webkit-backdrop-filter: blur(5px); 
+   border: 1px solid rgba(255, 255, 255, 0.1); 
+   box-shadow: 
+       0 10px 30px rgba(0,0,0,0.5),
+       inset 1px 1px 0 rgba(255,255,255,0.1);
 }
-
-#translation-popup { display: flex; align-items: center; gap: 0.75rem; position: absolute; z-index: 20; transform: translateY(8px); transition: opacity 0.2s ease-in-out; pointer-events: none; opacity: 0; padding: 0.75rem; border-radius: 0.5rem; max-width: 450px; font-size: 0.9rem; color: #9df2f2; /* Cyan */ background: rgba(30, 45, 45, 0.5); /* Kaca Cyan gelap */ backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(157, 242, 242, 0.2); /* Border Cyan */ }
-#translation-popup.visible { opacity: 1; pointer-events: auto; }
-#translation-popup::before { content: ''; position: absolute; bottom: 100%; left: 20px; border-width: 8px; border-style: solid; border-color: transparent transparent rgba(30, 45, 45, 0.5) transparent; /* Kaca Cyan gelap */ }
-
-/* ================================================================ */
-/* ============= TOMBOL TAMBAH BOOKMARK ================ */
-/* ================================================================ */
-.add-vocab-btn {
-    background-color: rgba(157, 242, 242, 0.2); /* Cyan */
-    border: 1px solid rgba(157, 242, 242, 0.4); /* Cyan */
-    color: #D7FDFD; /* Cyan Pucat */
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
+ #translation-popup.visible { opacity: 1; pointer-events: auto; }
+#translation-popup::before { content: ''; position: absolute; bottom: 100%; left: 20px; border-width: 8px; border-style: solid; border-color: transparent transparent rgba(var(--glass-base), 0.7) transparent; }
+ 
+ /* ================================================================ */
+ /* ============= TOMBOL TAMBAH BOOKMARK ================ */
+ /* ================================================================ */
+ .add-vocab-btn {
+   background-color: rgba(255, 255, 255, 0.1);
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   color: var(--text-main);
+     border-radius: 50%;
+     width: 24px;
+     height: 24px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -197,26 +255,56 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     flex-shrink: 0;
+ }
+.add-vocab-btn:hover { background-color: var(--accent-green); color: black; box-shadow: 0 0 10px var(--accent-green); }
+.add-vocab-btn.added { background-color: var(--accent-red); color: white; border-color: var(--accent-red); }
+ 
+ /* --- KONTROL UI & FONT --- */
+ .ui-controls { position: fixed; top: 1rem; right: 1.5rem; z-index: 1001; display: flex; gap: 0.5rem; }
+ 
+#font-adjuster-toggle, #vocab-toggle-button { 
+   padding: 0.5rem; 
+   border-radius: 0.5rem; 
+   cursor: pointer; 
+   background: rgba(var(--glass-base), 0.5); 
+   backdrop-filter: blur(12px); 
+   -webkit-backdrop-filter: blur(12px); 
+   border: 1px solid rgba(255, 255, 255, 0.1); 
+   color: var(--text-main); 
+   transition: all 0.2s ease-in-out; 
+   box-shadow: inset 1px 1px 0 rgba(255,255,255,0.05);
 }
-.add-vocab-btn:hover { background-color: rgba(157, 242, 242, 0.4); color: white; } /* Cyan */
-.add-vocab-btn.added { 
-    background-color: rgba(103, 199, 126, 0.3); /* Hijau */
-    color: white; 
-    border-color: rgba(103, 199, 126, 0.7); /* Hijau */
+#font-adjuster-toggle:hover, #vocab-toggle-button:hover { background: var(--accent-green); color: #000; }
+ 
+#font-adjuster-container { 
+   position: fixed; 
+   top: 4.5rem; 
+   right: 1.5rem; 
+   z-index: 1000; 
+   display: flex; 
+   align-items: center; 
+   gap: 0.75rem; 
+   padding: 0.75rem 1rem; 
+   border-radius: 0.75rem; 
+   background: rgba(var(--glass-base), 0.8); 
+   backdrop-filter: blur(12px); 
+   -webkit-backdrop-filter: blur(12px); 
+   border: 1px solid rgba(255, 255, 255, 0.1); 
+   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); 
+   opacity: 0; 
+   transform: translateY(-10px); 
+   pointer-events: none; 
+   transition: opacity 0.3s ease, transform 0.3s ease; 
 }
-
-/* --- KONTROL UI & FONT --- */
-.ui-controls { position: fixed; top: 1rem; right: 1.5rem; z-index: 1001; display: flex; gap: 0.5rem; }
-#font-adjuster-toggle, #vocab-toggle-button { padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; background: rgba(40, 38, 45, 0.4); /* Kaca ungu tua */ backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); color: #f5baee; /* Pink */ transition: all 0.2s ease-in-out; }
-#font-adjuster-toggle:hover, #vocab-toggle-button:hover { background: rgba(40, 38, 45, 0.7); /* Kaca ungu tua */ color: #F7CFF3; /* Pink Terang */ }
-#font-adjuster-container { position: fixed; top: 4.5rem; right: 1.5rem; z-index: 1000; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: rgba(40, 38, 45, 0.6); /* Kaca ungu tua */ backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); opacity: 0; transform: translateY(-10px); pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
-#font-adjuster-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-.font-adjuster-icon { color: #f5baee; /* Pink */ font-weight: 600; }
-input[type="range"] { -webkit-appearance: none; appearance: none; width: 120px; height: 4px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; outline: none; cursor: pointer; }
-input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #f5baee; /* Pink */ border-radius: 50%; border: 2px solid #E0E0E0; /* Teks Dasar */ transition: background-color 0.2s ease; }
-input[type="range"]::-webkit-slider-thumb:hover { background-color: #F7CFF3; } /* Pink Terang */
-#articles-container.font-size-1 .text-lg { font-size: 0.9rem; line-height: 1.5rem; }
-#articles-container.font-size-2 .text-lg { font-size: 1.0rem; line-height: 1.65rem; }
+ #font-adjuster-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.font-adjuster-icon { color: var(--text-main); font-weight: 600; }
+ 
+ input[type="range"] { -webkit-appearance: none; appearance: none; width: 120px; height: 4px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; outline: none; cursor: pointer; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: var(--accent-green); border-radius: 50%; border: 2px solid #fff; transition: background-color 0.2s ease; }
+input[type="range"]::-webkit-slider-thumb:hover { background-color: #fff; }
+ 
+ #articles-container.font-size-1 .text-lg { font-size: 0.9rem; line-height: 1.5rem; }
+ #articles-container.font-size-2 .text-lg { font-size: 1.0rem; line-height: 1.65rem; }
 #articles-container.font-size-3 .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
 #articles-container.font-size-4 .text-lg { font-size: 1.25rem; line-height: 1.9rem; }
 #articles-container.font-size-5 .text-lg { font-size: 1.4rem; line-height: 2.1rem; }
@@ -229,30 +317,40 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #F7CFF3; } /
     position: relative; 
 }
 .sub-article-container .article-header { 
-    background: rgba(40, 38, 45, 0.25); /* Kaca ungu tua (lebih tipis) */
-    backdrop-filter: none; 
-    box-shadow: none; 
-    border: none; 
-    border-radius: 0.5rem; 
-    padding: 0.5rem 1rem; 
+   background: rgba(255, 255, 255, 0.03);
+   backdrop-filter: none;
+   -webkit-backdrop-filter: none;
+   box-shadow: none;
+   border: 1px solid transparent; 
+     border-radius: 0.5rem; 
+     padding: 0.5rem 1rem; 
+ }
+ .sub-article-container .article-header::before { display: none; }
+ .sub-article-container .article-header h3 { font-size: 1rem; font-weight: 500; color: var(--text-muted); transition: color 0.3s ease; }
+ .sub-article-container .article-header .collapse-icon svg { width: 20px; height: 20px; stroke: var(--text-muted); transition: stroke 0.3s ease, transform 0.3s ease-in-out; }
+ .sub-article-container .article-content { 
+   background: rgba(var(--glass-base), 0.3);
+   backdrop-filter: blur(4px); 
+   -webkit-backdrop-filter: blur(4px);
+     padding-left: 1rem; 
+     border-radius: 0 0 0.5rem 0.5rem;
+   border: 1px solid rgba(255, 255, 255, 0.05);
+   border-top: none;
+   box-shadow: inset 0 10px 20px -10px rgba(0,0,0,0.5);
+ }
+ .sub-article-container::before { content: ''; position: absolute; left: -0.75rem; top: 0; bottom: 0; width: 2px; background-color: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+ .sub-article-container.active .article-header { 
+   border-radius: 0.5rem 0.5rem 0 0;
+   background: rgba(var(--glass-base), 0.6);
+   backdrop-filter: blur(6px);
+   -webkit-backdrop-filter: blur(6px);
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), inset 1px 1px 0 rgba(255, 255, 255, 0.05);
+   border-color: rgba(255, 255, 255, 0.08);
 }
-.sub-article-container .article-header::before { display: none; }
-.sub-article-container .article-header h3 { font-size: 1rem; font-weight: 500; color: #A0A0A0; /* Teks redup */ transition: color 0.3s ease; }
-.sub-article-container .article-header .collapse-icon svg { width: 20px; height: 20px; stroke: #A0A0A0; /* Teks redup */ transition: stroke 0.3s ease, transform 0.3s ease-in-out; }
-.sub-article-container .article-content { 
-    background: rgba(40, 38, 45, 0.25); /* Kaca ungu tua (lebih tipis) */
-    backdrop-filter: none; 
-    padding-left: 1rem; 
-    border-radius: 0 0 0.5rem 0.5rem;
-}
-.sub-article-container::before { content: ''; position: absolute; left: -0.75rem; top: 0; bottom: 0; width: 2px; background-color: rgba(160, 160, 160, 0.2); /* Garis redup */ border-radius: 2px; }
-.sub-article-container.active .article-header {
-    border-radius: 0.5rem 0.5rem 0 0;
-}
-.sub-article-container.active .article-header h3 { color: #9df2f2; } /* Cyan (untuk sub-aktif) */
-.sub-article-container.active .article-header .collapse-icon svg { stroke: #9df2f2; /* Cyan */ transform: rotate(180deg); }
-.sub-article-container.active .article-content { max-height: 93vh; }
-.sub-article-container .article-content-inner p { margin-bottom: 0.8rem; }
+ .sub-article-container.active .article-header h3 { color: var(--accent-green); }
+.sub-article-container.active .article-header .collapse-icon svg { stroke: var(--text-main); transform: rotate(180deg); }
+ .sub-article-container.active .article-content { max-height: 93vh; }
+ .sub-article-container .article-content-inner p { margin-bottom: 0.8rem; }
 .sub-article-container .article-content-inner { opacity: 0; transform: translateY(-15px); transition: opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s; }
 .sub-article-container.active .article-content-inner { opacity: 1; transform: translateY(0); }
 
@@ -265,17 +363,17 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #F7CFF3; } /
     right: 0;
     width: 380px;
     max-width: 90vw;
-    height: 100%;
-    z-index: 1002;
-    background: rgba(30, 28, 33, 0.7); /* Kaca ungu lebih gelap */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-left: 1px solid rgba(245, 186, 238, 0.2); /* Border Pink */
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    display: flex;
-    flex-direction: column;
-}
+     height: 100%;
+     z-index: 1002;
+   background: rgba(var(--glass-base), 0.85);
+     backdrop-filter: blur(20px);
+     -webkit-backdrop-filter: blur(20px);
+   border-left: 1px solid rgba(255, 255, 255, 0.1);
+     transform: translateX(100%);
+     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+     display: flex;
+     flex-direction: column;
+ }
 
 #vocab-sidebar.visible {
     transform: translateX(0);
@@ -284,27 +382,27 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #F7CFF3; } /
 .sidebar-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba(245, 186, 238, 0.2); /* Border Pink */
-    flex-shrink: 0;
-}
-
-#clear-vocab-button {
-    background-color: rgba(245, 186, 238, 0.15); /* Pink tipis */
-    border: none;
-    color: #f5baee; /* Pink */
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.5rem;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-#clear-vocab-button:hover {
-    background-color: rgba(245, 186, 238, 0.3); /* Pink tipis */
-    color: white;
-}
+     align-items: center;
+     padding: 1rem 1.5rem;
+   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+     flex-shrink: 0;
+ }
+ 
+ #clear-vocab-button {
+   background-color: rgba(209, 109, 109, 0.2);
+     border: none;
+   color: var(--accent-red);
+     padding: 0.25rem 0.75rem;
+     border-radius: 0.5rem;
+     font-size: 0.8rem;
+     cursor: pointer;
+     transition: all 0.2s ease;
+ }
+ 
+ #clear-vocab-button:hover {
+   background-color: var(--accent-red);
+     color: white;
+ }
 
 #vocab-list {
     list-style: none;
@@ -315,43 +413,43 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #F7CFF3; } /
 }
 
 #vocab-list::-webkit-scrollbar { width: 6px; }
-#vocab-list::-webkit-scrollbar-track { background: transparent; }
-#vocab-list::-webkit-scrollbar-thumb { background-color: rgba(245, 186, 238, 0.6); /* Pink */ border-radius: 6px; }
-
-.vocab-item {
-    padding: 1rem;
-    margin: 0.5rem;
-    border-radius: 0.5rem;
-    background-color: rgba(40, 38, 45, 0.3); /* Kaca ungu tua */
-    border: 1px solid transparent;
-    transition: all 0.2s ease;
-    cursor: pointer;
+ #vocab-list::-webkit-scrollbar-track { background: transparent; }
+#vocab-list::-webkit-scrollbar-thumb { background-color: rgba(122, 154, 126, 0.5); border-radius: 6px; }
+ 
+ .vocab-item {
+     padding: 1rem;
+     margin: 0.5rem;
+     border-radius: 0.5rem;
+   background-color: rgba(255, 255, 255, 0.05);
+     border: 1px solid transparent;
+     transition: all 0.2s ease;
+     cursor: pointer;
     position: relative;
 }
 
 .vocab-item:hover {
-    border-color: rgba(157, 242, 242, 0.3); /* Border Cyan */
-    background-color: rgba(40, 38, 45, 0.6); /* Kaca ungu tua */
-}
-
-.vocab-item-original {
-    font-weight: 500;
-    color: #f5baee; /* Pink */
-    margin-bottom: 0.25rem;
-}
-
-.vocab-item-translation {
-    font-size: 0.9rem;
-    color: #9df2f2; /* Cyan */
-    margin-bottom: 0.75rem;
-}
-
-.vocab-item-source {
-    font-size: 0.75rem;
-    color: #A0A0A0; /* Teks redup */
-    border-top: 1px dashed rgba(160, 160, 160, 0.2); /* Garis redup */
-    padding-top: 0.5rem;
-}
+   border-color: var(--accent-green);
+   background-color: rgba(255, 255, 255, 0.08);
+ }
+ 
+ .vocab-item-original {
+     font-weight: 500;
+   color: var(--text-main);
+     margin-bottom: 0.25rem;
+ }
+ 
+ .vocab-item-translation {
+     font-size: 0.9rem;
+   color: var(--accent-green);
+     margin-bottom: 0.75rem;
+ }
+ 
+ .vocab-item-source {
+     font-size: 0.75rem;
+   color: var(--text-muted);
+     border-top: 1px dashed rgba(156, 163, 175, 0.2);
+     padding-top: 0.5rem;
+ }
 
 .delete-vocab-btn {
     position: absolute;
@@ -361,7 +459,7 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #F7CFF3; } /
     height: 20px;
     border: none;
     background: none;
-    color: #A0A0A0; /* Teks redup */
+    color: #9ca3af;
     font-size: 1.2rem;
     line-height: 1;
     cursor: pointer;
@@ -371,19 +469,56 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #F7CFF3; } /
 
 .vocab-item:hover .delete-vocab-btn {
     opacity: 1;
-}
-
-.delete-vocab-btn:hover {
-    color: #f5baee; /* Pink */
-}
-
-.empty-vocab-message {
-    text-align: center;
-    padding: 2rem;
-    color: #A0A0A0; /* Teks redup */
-}
-
-/* ================================================================ */
+ }
+ 
+/* GAYA KHUSUS LAST READ & DIVIDER */
+.vocab-divider {
+   font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  color: var(--text-muted);
+    margin: 1.5rem 0 0.5rem 0.5rem;
+    padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+ }
+  
+ .vocab-item.last-read {
+  border: 1px solid rgba(122, 154, 126, 0.5);
+  background: linear-gradient(90deg, rgba(122, 154, 126, 0.1), transparent);
+ }
+  
+ .last-read-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+  background-color: var(--accent-green);
+  color: #000;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  
+ .vocab-item-book {
+    font-size: 0.7rem;
+  color: var(--accent-red);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+ }
+  
+  .delete-vocab-btn:hover {
+   color: var(--accent-red);
+ }
+ 
+ .empty-vocab-message {
+     text-align: center;
+     padding: 2rem;
+   color: var(--text-muted);
+ }
+ 
+ /* ================================================================ */
 /* ================= PREVIEW GAMBAR ================== */
 /* ================================================================ */
 #image-preview-overlay {
@@ -433,35 +568,36 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #F7CFF3; } /
     transform: translateY(-50%); 
     right: 1.5rem;
     display: flex;
-    flex-direction: column; 
-    gap: 0.75rem; 
-    background-color: rgba(40, 38, 45, 0.5); /* Kaca ungu tua */
-    padding: 0.75rem 0.5rem; 
-    border-radius: 0.75rem; 
-    z-index: 10; 
-}
-
-.preview-control-btn {
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    background-color: rgba(40, 38, 45, 0.5); /* Kaca ungu tua */
-    color: #f5baee; /* Pink */
-    font-size: 1.5rem;
-    font-weight: bold;
-    line-height: 1;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
+     flex-direction: column; 
+     gap: 0.75rem; 
+   background-color: rgba(var(--glass-base), 0.5);
+     padding: 0.75rem 0.5rem; 
+     border-radius: 0.75rem; 
+     z-index: 10; 
+   border: 1px solid rgba(255,255,255,0.1);
+ }
+ 
+ .preview-control-btn {
+     width: 40px;
+     height: 40px;
+     border: none;
+     border-radius: 50%;
+   background-color: rgba(var(--glass-base), 0.8);
+   color: var(--text-main);
+     font-size: 1.5rem;
+     font-weight: bold;
+     line-height: 1;
+     cursor: pointer;
+     transition: all 0.2s ease;
+     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .preview-control-btn:hover {
-    background-color: rgba(40, 38, 45, 0.9); /* Kaca ungu tua */
-    color: #F7CFF3; /* Pink Terang */
-}
+   background-color: var(--accent-green);
+   color: #000;
+ }
 
 #preview-close-button {
     font-size: 2rem;
